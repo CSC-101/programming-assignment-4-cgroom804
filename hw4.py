@@ -21,7 +21,7 @@ def filter_state(counties: list[build_data.CountyDemographics], state: str) -> l
     for county in counties:
         if county.state == state:
             filtered_list.append(county)
-    print(f"Filter: state == {state}, {len(filtered_list)} entries)")
+    print(f"Filter: state == {state}, {len(filtered_list)} entries")
     return filtered_list
 
 def filter_gt(counties: list[build_data.CountyDemographics], level: str, field: str, value: float) -> list[build_data.CountyDemographics]:
@@ -72,7 +72,7 @@ def percent(counties: list[build_data.CountyDemographics], level: str, field: st
     return counties
 
 def main(): # takes no arguments
-    #operation = display.ops
+    operation = input("Provide an operation: ")
     #print(operation)
     #operations_file = sys.argv[1]
     #operations_file = "inputs/bachelors_gt_60.ops"
@@ -97,25 +97,25 @@ def main(): # takes no arguments
                     detail = sections[1].split(".")
                     level = detail[1]
                     value = float(sections[2])
-                    field = detail[0]
+                    field = detail[0].lower()
                     result = filter_gt(counties, level, field, value)
                 elif operation == "filter-lt":
                     detail = sections[1].split(".")
                     level = detail[1]
                     value = float(sections[2])
-                    field = detail[0]
+                    field = detail[0].lower()
                     result = filter_lt(counties, level, field, value)
                 elif operation == "population-total":
                     result = population_total(counties)
                 elif operation == "population":
                     detail = sections[1].split(".")
                     level = detail[1]
-                    field = detail[0]
+                    field = detail[0].lower()
                     result = population(counties, level, field)
                 elif operation == "percent":
                     detail = sections[1].split(".")
                     level = detail[1]
-                    field = detail[0]
+                    field = detail[0].lower()
                     result = percent(counties, level, field)
                 else:
                     print(f"Error: '{operation}' not a valid operation")
